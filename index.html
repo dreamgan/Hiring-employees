@@ -935,6 +935,102 @@
             background: rgba(214, 48, 49, 0.1);
         }
 
+        /* --- About Us Section --- */
+        .about-us {
+            padding: 80px 20px;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 40px;
+            margin: 40px 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            text-align: center;
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #444;
+        }
+
+        /* --- Updated Footer & Links --- */
+        .footer-links {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+
+        .footer-links a:hover {
+            opacity: 0.7;
+        }
+
+        /* --- Privacy Modal --- */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(8px);
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background: white;
+            margin: 10% auto;
+            padding: 40px;
+            border-radius: 30px;
+            max-width: 600px;
+            width: 90%;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+            line-height: 1.6;
+            direction: rtl;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #888;
+        }
+
+        .modal-content h3 {
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .about-us {
+                padding: 50px 20px;
+            }
+
+            .about-content {
+                font-size: 1.1rem;
+            }
+
+            .modal-content {
+                padding: 30px;
+                margin: 20% auto;
+            }
+        }
+
         /* --- Refined Design Overrides --- */
 
         /* --- Refined Design Overrides --- */
@@ -1167,6 +1263,22 @@
         </div>
     </section>
 
+    <!-- NEW SECTION: About Us -->
+    <section class="about-us" id="about">
+        <div class="section-header">
+            <h2>קצת עלינו</h2>
+            <p>הלב מאחורי גן החלומות</p>
+        </div>
+        <div class="about-content">
+            <p>
+                גן החלומות הוא רשת גני ילדים מובילה המעניקה סביבה חינוכית תומכת, אוהבת ומפתחת לקטנטנים.
+                אנו מאמינים שהצוות שלנו הוא הלב הפועם של הגן, ולכן אנו משקיעים במקצועיות, ביחס אישי ובאווירה משפחתית לכל
+                עובד ועובדת.
+                הצטרפו אלינו למקום שבו עבודה היא שליחות, והחיוך של הילדים הוא השכר הגדול ביותר.
+            </p>
+        </div>
+    </section>
+
     <section class="gallery">
         <div class="section-header header-gallery">
             <h2>🏡 הגנים שלנו 🏡</h2>
@@ -1309,7 +1421,19 @@
     <footer>
         <p>&copy; 2026 גן החלומות - כל הזכויות שמורות</p>
         <p>מעצבים את דור העתיד באהבה</p>
+        <div class="footer-links">
+            <a href="javascript:void(0)" onclick="openModal('privacy')">מדיניות פרטיות</a>
+            <a href="javascript:void(0)" onclick="openModal('terms')">תנאי שימוש</a>
+        </div>
     </footer>
+
+    <!-- Privacy Modal -->
+    <div id="legal-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <div id="modal-text"></div>
+        </div>
+    </div>
 
     <script>
         // REPLACE THIS URL AFTER DEPLOYING AS WEB APP
@@ -1499,6 +1623,43 @@
                     }, 500);
                 };
             }, 5000); // 5 seconds per image
+        }
+
+        // --- Modal Handling ---
+        const modalTexts = {
+            privacy: `
+                <h3>מדיניות פרטיות</h3>
+                <p>אנו בגן החלומות מכבדים את פרטיותכם. המידע הנמסר בטופס (שם, טלפון, קורות חיים) משמש אותנו אך ורק לצורך תהליך הגיוס וההערכה המקצועית שלכם למשרה המבוקשת.</p>
+                <ul>
+                    <li>המידע מאובטח ואינו מועבר לצדדים שלישיים ללא הסכמתכם.</li>
+                    <li>אנו משתמשים במידע כדי ליצור איתכם קשר בנוגע להצעות עבודה רלוונטיות.</li>
+                    <li>ניתן לבקש בכל עת את מחיקת המידע ממאגרינו על ידי פנייה למשרדינו.</li>
+                </ul>
+            `,
+            terms: `
+                <h3>תנאי שימוש</h3>
+                <p>השימוש באתר זה נועד למטרת הגשת מועמדות לעבודה בלבד. הגשת מועמדות אינה מהווה התחייבות להעסקה.</p>
+                <p>כל התכנים באתר, לרבות תמונות ועיצוב, מוגנים בזכויות יוצרים של גן החלומות.</p>
+            `
+        };
+
+        function openModal(type) {
+            document.getElementById('modal-text').innerHTML = modalTexts[type];
+            document.getElementById('legal-modal').style.display = 'block';
+            document.body.style.overflow = 'hidden'; // Prevent scroll
+        }
+
+        function closeModal() {
+            document.getElementById('legal-modal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close on outside click
+        window.onclick = function (event) {
+            const modal = document.getElementById('legal-modal');
+            if (event.target == modal) {
+                closeModal();
+            }
         }
     </script>
 </body>
